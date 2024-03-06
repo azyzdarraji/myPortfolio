@@ -70,23 +70,23 @@
 
 
 /* =====================  CHANGE BACKGROUND HEADER  ======================== */
-function scrollHeader(){
-  const nav = document.getElementById('header')
-  // When the scroll is greater than 200 viewport height, add the scroll-header class to the header tag
+// function scrollHeader(){
+//   const nav = document.getElementById('header')
+//   // When the scroll is greater than 200 viewport height, add the scroll-header class to the header tag
   
-  if (this.scrollY >= 80) nav?.classList.add('scroll-header'); else nav?.classList.remove('scroll-header')
-}
-window.addEventListener('scroll',scrollHeader)
+//   if (this.scrollY >= 80) nav?.classList.add('scroll-header'); else nav?.classList.remove('scroll-header')
+// }
+// window.addEventListener('scroll',scrollHeader)
 
-/* =====================  SHOW SCROLL up  ======================== */
+// /* =====================  SHOW SCROLL up  ======================== */
 
-function scrollUp(){
-  const scrollUp = document.getElementById('scroll-up')
-  // When the scroll is greater than 560 viewport height, add the scroll-header class to the header tag
+// function scrollUp(){
+//   const scrollUp = document.getElementById('scroll-up')
+//   // When the scroll is greater than 560 viewport height, add the scroll-header class to the header tag
   
-  if (this.scrollY >= 560) scrollUp?.classList.add('show-scroll'); else scrollUp?.classList.remove('show-scroll')
-}
-window.addEventListener('scroll',scrollUp)
+//   if (this.scrollY >= 560) scrollUp?.classList.add('show-scroll'); else scrollUp?.classList.remove('show-scroll')
+// }
+// window.addEventListener('scroll',scrollUp)
 
 /* =====================  DARK LIGHT THEME  ======================== */
 const themeButton = document.getElementById('theme-button')
@@ -118,11 +118,70 @@ themeButton?.addEventListener('click',()=>{
   localStorage.setItem('selected-icon',getCurrentIcon())
 })
 /* =====================  Contact   ======================== */
+
+// contact form
+
+const contactForm = document.getElementById('contactForm');
+contactForm?.addEventListener('submit',(e) =>checkData(e))
+
+function checkData(e) {
+  let formIsOkay = true;
+  const name = document.getElementById('name');
+  const email = document.getElementById('email');
+  const project = document.getElementById('project');
+  const message = document.getElementById('message');
+
+  if (!name.value) {
+    name?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    name?.focus()
+  } else {
+    name?.parentNode.classList.remove('invalidGroup')
+  }
+
+  if (!email.value || !isValidEmail(email.value)) {
+    email?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    email?.focus()
+  } else {
+    email?.parentNode.classList.remove('invalidGroup')
+  }
+
+
+  if (!project.value ) {
+    project?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    project?.focus()
+  } else {
+    project?.parentNode.classList.remove('invalidGroup')
+  }
+
+  if (!message.value ) {
+    message?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    message?.focus()
+  } else {
+    message?.parentNode.classList.remove('invalidGroup')
+  }
+  
+  if(!formIsOkay) {
+    e.preventDefault();
+    return false
+  }
+}
+
+
+
+
 function sendMail () {
-  let name = document.getElementById("name")
-  console.log("name", name)
+  const name = document.getElementById('name');
+  const email = document.getElementById('email');
+  const project = document.getElementById('project');
+  const message = document.getElementById('message');
 
   try {
+    let formIsOkay = true;
+
     let params = {
       name: document.getElementById("name").value,
       email: document.getElementById("email").value,
@@ -130,21 +189,71 @@ function sendMail () {
       message: document.getElementById("message").value,
 
   };
+ 
 
-  console.log("params", params)
+  if (!name.value) {
+    name?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    name?.focus()
+  } else {
+    name?.parentNode.classList.remove('invalidGroup')
+  }
+
+
+  if (!email.value || !isValidEmail(email.value)) {
+    email?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    email?.focus()
+  } else {
+    email?.parentNode.classList.remove('invalidGroup')
+  }
+
+
+  if (!project.value) {
+    project?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    project?.focus()
+  } else {
+    project?.parentNode.classList.remove('invalidGroup')
+  }
+
+
+  if (!message.value) {
+    message?.parentNode.classList.add('invalidGroup');
+    formIsOkay=false;
+    message?.focus()
+  } else {
+    message?.parentNode.classList.remove('invalidGroup')
+  }
+
+
   const serviceId = "service_y79wy9z";
   const templateId = "template_77yuyan";
-  const res = emailjs.send(serviceId, templateId, params);
-  if (res) {
+  if (formIsOkay) {
+    const res = emailjs.send(serviceId, templateId, params);
+    if (res) {
       document.getElementById("name").value = "";
       document.getElementById("email").value = "";
       document.getElementById("project").value = "";
       document.getElementById("message").value = "";
+      message?.parentNode.classList.remove('invalidGroup');
+      project?.parentNode.classList.remove('invalidGroup');
+      email?.parentNode.classList.remove('invalidGroup') ;
+      name?.parentNode.classList.remove('invalidGroup') ;
+
       alert("Your communication has been successfully transmitted . ")
+  }}else {
   }
-    
   } catch (error) {
-    alert(" Sorry, fixing it now. Thanks for your patience .")
+alert("Error: Unable to transmit your communication. Please send an email to azyzdarraji@gmail.com.");
 
   }
 }
+
+function isValidEmail (email) {
+  const emailReg =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
+  return emailReg.test (email)
+     
+}
+

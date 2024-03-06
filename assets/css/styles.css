@@ -750,6 +750,13 @@ body.dark-theme {
      border-radius: 6px;
  }
 
+ li {
+    list-style-type: circle;
+  }
+  
+
+  
+
  /* =========================  CONTACT ME ======================== */
 
  .contact_container {
@@ -1158,4 +1165,14 @@ body.dark-theme {
     .contact_inputs {
         grid-template-columns: repeat(2,1fr);
     }
+
+}
+
+.invalidGroup {
+    border: 2px solid red;
+    border-color: red;
+    color:red
+}
+.invalidGroup > label {
+    color : red;
 }
