@@ -978,7 +978,6 @@ body.dark-theme {
         justify-self: center ;
     }
 
-    .about_container,
     .skills_container,
     .portfolio_content,
     .project_container,
@@ -1054,19 +1053,10 @@ body.dark-theme {
     margin-left: 3rem;
    }
    .about_container {
-    column-gap: 5rem;
+    column-gap: 1rem;
    }
    .home_img{
     width: 350px;
-   }
-   .about_description{
-    text-align: initial;
-   }
-   .about_info {
-    justify-content: space-between;
-   }
-   .about_buttons {
-    justify-content:initial;
    }
    .qualification_tabs {
     justify-content: center;
@@ -1165,7 +1155,6 @@ body.dark-theme {
     .contact_inputs {
         grid-template-columns: repeat(2,1fr);
     }
-
 }
 
 .invalidGroup {
